@@ -70,7 +70,7 @@ has been introduced in the paper.
 We evaluate all the models on all the above datasets 
 in offline phase and 3 datasets in online one. Consulting the
 parameter setting in `scripts`, you could reproduce our experimental
-results in the paper. For example,
+results in the paper. For example, Nips offline,
 ```bash
 python main.py -data nipsA_offline -batch_size 512 -plot_title '0201' \
 -max_epoch 20 -lr 1e-3 -opt Adam -test_batch_size 5000 -model gbdt2nn \
@@ -78,6 +78,18 @@ python main.py -data nipsA_offline -batch_size 512 -plot_title '0201' \
 -emb_epoch 2 -loss_de 2 -loss_dr 0.7 -tree_lr 0.1 -cate_layers 16,16 -nslices 5 \
 -cate_embsize 2 -tree_layers 100,100,100,50 -embsize 20 -maxleaf 64 -log_freq 500
 ```
+
+and Nips online(use deepgbm as model),
+```bash
+python online_main.py -data nipsA_online -batch_size 512 -plot_title '0201' \
+-max_epoch 20 -lr 1e-3 -opt Adam -test_batch_size 5000 -model deepgbm \
+-task binary -l2_reg 1e-6 -test_freq 3000 -seed 1,2,3,4,5 -group_method Random \
+-emb_epoch 2 -loss_de 2 -loss_dr 0.7 -tree_lr 0.1 -cate_layers 16,16 -nslices 5 \
+-cate_embsize 2 -tree_layers 100,100,100,50 -embsize 20 -maxleaf 64 -log_freq 500
+```
+
+![image](https://github.com/sm807983636/DeepGBM/blob/master/experiments/Image/NIPS%20data%20set%E2%80%94%E2%80%94AA%20part.jpg)
+
 We can easily get part of the results on nipsA (AutoML-1) as the following table.
 
 | Model | Seed 1 | Seed 2 | Seed 3 | Seed 4 | Seed 5 | Mean | Std |
